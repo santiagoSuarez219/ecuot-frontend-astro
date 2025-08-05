@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #e9901e;
+  --color-secondary: #fbbb28;
+  --color-tertiary: #b4c42c;
+  --color-quaternary: #00aeac;
+  --color-quinary: #108181;
+  --color-senary: #195855;
+  --color-septenary: #172139;
+  --color-font-color: #525260;
+  --color-font-color-light: #e0e0e0;
+  --color-delete-color: #b91c1c;
+}
+
+body {
+  font-family: "Cabin Variable", sans-serif;
+}
+
+.primary-button {
+  @apply bg-quaternary px-8 py-4 rounded-2xl text-white cursor-pointer transition-all duration-200 ease-in-out hover:scale-105;
+}
+
+.poster {
+  @apply relative w-full lg:h-[658px] overflow-x-hidden md:px-6 lg:pl-24;
+}

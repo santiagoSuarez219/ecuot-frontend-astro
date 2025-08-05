@@ -1,0 +1,40 @@
+---
+import { Image } from "astro:assets";
+---
+
+<section class="w-full px-4 lg:px-10" id="about-us">
+  <div
+    class="mt-12 poster md:py-16 md:rounded-3xl md:bg-quinary text-septenary md:text-white flex flex-col-reverse md:flex-row items-center gap-6 xl:gap-24 lg:pr-24 xl:justify-between"
+  >
+    <!-- Texto -->
+    <div
+      class="flex flex-col justify-center xl:max-w-[600px] font-semibold flex-1"
+    >
+      <h2 class="text-5xl lg:text-6xl mb-3">Sobre nosotros</h2>
+      <p class="text-lg lg:text-xl">
+        ECOUT surge de un proyecto del Grupo de Estudios sobre Desarrollo Local
+        y Gestión Territorial de la Institución Universitaria Colegio Mayor de
+        Antioquia, enfocado en los conflictos urbanos generados por las
+        intervenciones y decisiones sobre el ordenamiento territorial de
+        Medellín, Colombia. La investigación caracterizó, mediante el análisis
+        de prensa, las tensiones asociadas al ordenamiento territorial en
+        Medellín entre 1999 y 2014.
+      </p>
+    </div>
+
+    <!-- Imagen del video -->
+    <div
+      id="openModalBtn"
+      class="w-full md:max-w-[317px] lg:max-w-[634px] flex flex-col items-center text-lg lg:text-xl font-semibold flex-1"
+    >
+      <Image
+        src="/src/assets/Images/video.avif"
+        alt="video"
+        width={634}
+        height={250}
+        class="object-cover cursor-pointer h-[250px] md:h-auto w-full"
+      />
+      <p class="text-lg">Dar clic para ver el video</p>
+    </div>
+  </div>
+</section>

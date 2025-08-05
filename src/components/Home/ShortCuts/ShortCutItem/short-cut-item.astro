@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+
+type ShortCutItemProps = {
+  name: string;
+  url_image: string;
+  alt_image: string;
+  color: string;
+  route: string;
+};
+
+const { name, url_image, alt_image, color, route } = Astro.props;
+---
+
+<div
+  class="w-full h-[390px] lg:h-[460px] rounded-xl md:rounded-3xl relative overflow-x-hidden flex justify-center items-center"
+>
+  <figure class="absolute inset-0">
+    <Image
+      src={`/src/assets/Images/${url_image}.jpg`}
+      alt={alt_image}
+      class="w-full h-full object-cover"
+      width={800}
+      height={600}
+    />
+  </figure>
+  <div class={`absolute inset-0 ${color} opacity-70`}></div>
+  <div
+    class="relative z-10 flex flex-col pt-32 lg:pt-56 items-center justify-between h-full text-white max-w-[236px] font-semibold"
+  >
+    <h1 class="text-4xl text-center">{name}</h1>
+    <a
+      href={route}
+      class="text-lg primary-button md:w-[165px] mb-12 lg:mb-16 text-center"
+    >
+      Ver más
+    </a>
+  </div>
+</div>

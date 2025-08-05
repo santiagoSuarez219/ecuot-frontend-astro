@@ -1,0 +1,57 @@
+---
+
+---
+
+<div>
+  <!-- Modal -->
+  <div
+    id="videoModal"
+    class="fixed inset-0 bg-black/60 z-50 hidden items-center justify-center"
+  >
+    <div
+      id="modalContent"
+      class="relative bg-white rounded-lg overflow-hidden w-[90%] max-w-3xl"
+    >
+      <!-- Video -->
+      <div class="aspect-video w-full">
+        <iframe
+          class="w-full h-full"
+          src="https://www.youtube.com/embed/3xFT5pfECC8?si=t88uTBeU0QXAy-Uq"
+          title="YouTube video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <!-- Script -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const openBtn = document.getElementById("openModalBtn");
+
+        const modal = document.getElementById("videoModal")!;
+        const modalContent = document.getElementById("modalContent");
+
+        if (openBtn && modal && modalContent) {
+          openBtn.addEventListener("click", () => {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
+          });
+
+          // Cerrar modal al hacer clic fuera del contenido
+          modal.addEventListener("click", (e) => {
+            if (!modalContent.contains(e.target as Node)) {
+              closeModal();
+            }
+          });
+
+          function closeModal() {
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+            const iframe = modal.querySelector("iframe");
+            if (iframe) iframe.src = iframe.src;
+          }
+        }
+      });
+    </script>
+  </div>
+</div>
