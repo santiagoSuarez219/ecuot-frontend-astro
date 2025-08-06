@@ -2,7 +2,9 @@
 import UrbanInterventionCard from "./UrbanInterventionCard/urban-intervention-card.astro";
 import type { LastInterventionsListResponse } from "../../../interfaces/last-interventions-list";
 
-const response = await fetch("http://localhost:4000/api/interventions/latest");
+const response = await fetch(
+  `${import.meta.env.BACKEND_URL}/interventions/latest`,
+);
 
 const interventions: LastInterventionsListResponse[] = await response.json();
 ---
