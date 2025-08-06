@@ -1,11 +1,5 @@
 ---
-// import type { InterventionResponse } from '../../types';
-
 const { intervention } = Astro.props;
-
-function getImageSrc(image: string | undefined) {
-  return image ? image : "logo.avif";
-}
 ---
 
 <a
@@ -14,7 +8,7 @@ function getImageSrc(image: string | undefined) {
 >
   <figure class="absolute inset-0">
     <img
-      src={getImageSrc(intervention.image)}
+      src={intervention.image}
       alt={intervention.interventionName}
       class="w-full h-full object-cover"
       loading="lazy"

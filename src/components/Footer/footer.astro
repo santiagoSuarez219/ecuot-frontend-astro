@@ -1,0 +1,117 @@
+---
+import { Image } from "astro:assets";
+---
+
+<footer class="mt-8 lg:mt-16">
+    <div
+        class="px-4 xl:px-56 grid grid-cols-1 md:grid-cols-4 gap-4 lg:gap-16 items-center lg:[&>figure]:h-[120px] [&>figure]:flex [&>figure]:justify-center [&>figure]:items-center"
+    >
+        <a
+            href="https://www.colmayor.edu.co/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <figure>
+                <Image
+                    src="/src/assets/Images/logo_colmayor.avif"
+                    alt="logo-colmayor"
+                    width={200}
+                    height={200}
+                    class="object-cover"
+                />
+            </figure>
+        </a>
+        <a
+            href="https://www.itm.edu.co/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <figure>
+                <Image
+                    src="/src/assets/Images/logo_itm.avif"
+                    alt="logo-itm"
+                    width={200}
+                    height={200}
+                    class="object-cover"
+                />
+            </figure>
+        </a>
+        <a
+            href="https://www.medellin.gov.co/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <figure>
+                <Image
+                    src="/src/assets/Images/logo_alcaldia.avif"
+                    alt="logo-alcaldia"
+                    width={200}
+                    height={200}
+                    class="object-cover"
+                />
+            </figure>
+        </a>
+        <a
+            href="https://www.colmayor.edu.co/investigacion/desarrollo-gestion-territorial/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <figure>
+                <Image
+                    src="/src/assets/Images/logo_desarrollo.avif"
+                    alt="logo-desarrollo"
+                    width={200}
+                    height={200}
+                    class="object-cover"
+                />
+            </figure>
+        </a>
+    </div>
+    <div
+        class="w-full bg-septenary mt-8 md:h-[400px] flex flex-col md:flex-row lg:justify-between px-4 lg:px-16 gap-4"
+    >
+        <figure class="lg:w-[400px] h-full flex items-center justify-center">
+            <Image
+                src="/src/assets/Images/logo_footer.png"
+                width={400}
+                height={200}
+                alt="logo-footer"
+            />
+        </figure>
+        <div class="md:w-1/3 h-full flex flex-col py-4 md:py-10 justify-center">
+            <h3 class="text-primary text-xl font-semibold">Menú</h3>
+            <ul class="text-white text-lg font-normal mt-4 flex flex-col gap-2">
+                <li class="cursor-pointer">
+                    <a href="/">Inicio</a>
+                </li>
+
+                <li class="cursor-pointer">
+                    <a href="/interventions">Actuaciones Urbanísticas</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="/news">Acontecimientos noticiosos</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="/conflicts">Conflictos</a>
+                </li>
+                <li class="cursor-pointer">
+                    <a href="/project">El Proyecto</a>
+                </li>
+            </ul>
+        </div>
+        <div class="md:w-1/3 h-full flex flex-col py-4 md:py-10 justify-center">
+            <h3 class="text-primary text-xl font-semibold">Contacto</h3>
+            <ul class="text-white text-lg font-normal mt-4 flex flex-col gap-2">
+                <li>Facultad de ciencias sociales y educación</li>
+                <li>Dirección: Calle 112 #45-56</li>
+                <li>Teléfono: + 57 (4) 444 56 11 Ext 128</li>
+                <li>Correo: Investigacionfcs@colmayor.edu.co</li>
+            </ul>
+        </div>
+    </div>
+    <div
+        class="text-base w-full bg-white px-4 md:px-0 py-2 md:py-5 flex justify-center items-center md:text-xl font-semibold text-septenary"
+    >
+        © {new Date().getFullYear()} Santiago Suarez. Todos los derechos reservados.
+    </div>
+</footer>

@@ -1,6 +1,8 @@
 ---
 import UrbanPlanningInterventions from "../components/Home/UrbanPlanningInterventios/urban-planning-interventions.astro";
+import Statistics from "../components/Home/Statistics/statistics.astro";
 import ShortCuts from "../components/Home/ShortCuts/short-cuts.astro";
+import Documents from "../components/Home/Documents/documents.astro";
 import VideoModal from "../components/VideoModal/video-modal.astro";
 import AboutUs from "../components/Home/AboutUs/about-us.astro";
 import Banner from "../components/Home/Banner/banner.astro";
@@ -16,6 +18,10 @@ import Layout from "../layouts/Layout.astro";
   <AboutUs />
   <ShortCuts />
   <UrbanPlanningInterventions />
-  <VideoModal />
-  <!-- <Welcome /> -->
+  <Statistics />
+  <Documents>
+    <VideoModal />
+
+    <!-- <Welcome /> -->
+  </Documents>
 </Layout>

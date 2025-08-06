@@ -1,0 +1,54 @@
+---
+import DocumentItem from "./DocumentItem/document-item.astro";
+
+const documents = [
+    {
+        title: "Proyecto de investigación",
+        link: "/pdf/Proyecto_Investigacion.pdf",
+    },
+    {
+        title: "Ecuot",
+        link: "/pdf/Ecuot.pdf",
+    },
+    {
+        title: "Caracterización de acciones urbanísticas",
+        link: "/pdf/Caracterizacion_Acciones_urbanisticas.pdf",
+    },
+    {
+        title: "Tendencias de la conflictividad",
+        link: "/pdf/Tendencias_Conflictividad.pdf",
+    },
+];
+---
+
+<section class="poster mt-12 px-4 lg:px-16" id="documents-section">
+    <div
+        class="w-full h-full relative rounded-2xl md:rounded-3xl lg:rounded-[80px] overflow-hidden p-4 lg:p-0"
+    >
+        <figure class="hidden md:block absolute inset-0">
+            <img
+                src="main-poster.avif"
+                alt="main-poster"
+                class="w-full h-full object-cover"
+            />
+        </figure>
+        <div class="absolute inset-0 bg-quinary opacity-90"></div>
+        <div
+            class="relative z-10 flex flex-col justify-center items-center h-full text-white font-semibold"
+        >
+            <h1 class="text-6xl">Documentos</h1>
+            <div
+                class="grid grid-cols-1 min-[320px]:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 xl:gap-10 mt-8 lg:mt-14 lg:px-8 xl:px-0"
+            >
+                {
+                    documents.map((document) => (
+                        <DocumentItem
+                            title={document.title}
+                            link={document.link}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+</section>

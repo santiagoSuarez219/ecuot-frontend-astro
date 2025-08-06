@@ -1,12 +1,10 @@
 ---
-// import UrbanInterventionCard from "./UrbanInterventionCard.astro";
-// import type { InterventionResponse } from "../../types";
+import UrbanInterventionCard from "./UrbanInterventionCard/urban-intervention-card.astro";
+import type { LastInterventionsListResponse } from "../../../interfaces/last-interventions-list";
 
-// export interface Props {
-//     interventions?: InterventionResponse[];
-// }
+const response = await fetch("http://localhost:4000/api/interventions/latest");
 
-// const { interventions } = Astro.props;
+const interventions: LastInterventionsListResponse[] = await response.json();
 ---
 
 <div
@@ -26,12 +24,13 @@
   <p class="text-2xl my-4 lg:my-8">
     Visita algunas de las actuaciones urbanísticas principales.
   </p>
-  <!-- <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 px-4 lg:px-12 xl:px-56">
-        {interventions?.map((intervention) => (
-            <UrbanInterventionCard
-                key={intervention._id}
-                intervention={intervention}
-            />
-        ))}
-    </div> -->
+  <div
+    class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 px-4 lg:px-12 xl:px-56"
+  >
+    {
+      interventions.map((intervention) => (
+        <UrbanInterventionCard intervention={intervention} />
+      ))
+    }
+  </div>
 </div>
