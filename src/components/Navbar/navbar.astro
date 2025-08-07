@@ -1,5 +1,13 @@
 ---
 import { Image } from "astro:assets";
+
+const routes = [
+  { name: "Inicio", path: "/" },
+  { name: "Actuaciones Urbanísticas", path: "/interventions" },
+  { name: "Acontecimientos Noticiosos", path: "/news" },
+  { name: "Conflictos", path: "/conflicts" },
+  { name: "El Proyecto", path: "/project" },
+];
 ---
 
 <header
@@ -36,23 +44,17 @@ import { Image } from "astro:assets";
 
   <nav class="hidden ml-4 lg:flex items-center justify-between lg:flex-1">
     <ul
-      class="flex gap-3 xl:gap-6 [&>li]:cursor-pointer text-septenary text-[0.9rem] xl:text-base"
+      class="flex gap-3 xl:gap-6 [&>li]:cursor-pointer [&>li]:hover:underline [&>li]:underline-offset-4 text-septenary text-[0.9rem] xl:text-base"
     >
-      <li class="">
-        <a href="/">Inicio</a>
-      </li>
-      <li class="">
-        <a href="/interventions">Actuaciones Urbanísticas</a>
-      </li>
-      <li class="">
-        <a href="/news">Acontecimientos Noticiosos</a>
-      </li>
-      <li class="">
-        <a href="/conflicts">Conflictos</a>
-      </li>
-      <li class="">
-        <a href="/project">El Proyecto</a>
-      </li>
+      {
+        routes.map((route) => (
+          <li>
+            <a href={route.path} class="font-semibold">
+              {route.name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
     <ul>
       <li class="primary-button">
