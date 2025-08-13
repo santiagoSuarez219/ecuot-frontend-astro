@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { actions } from "astro:actions";
 import type { Intervention } from "../../../interfaces/interventions-list";
+import { navigate } from 'astro:transitions/client';
 
 interface Props {
   initialData: Intervention[];
@@ -10,11 +11,13 @@ export default function InterventionSearch() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState<Intervention[]>([]);
   const [hierarchy, setHierarchy] = useState("");
+  const [searchBySystem, setSearchBySystem] = useState("");
 
-  const fetchResults = async (query: string, hierarchyValue: string) => {
+  const fetchResults = async (query: string, hierarchyValue: string, systemValue: string) => {
     const { data, error } = await actions.searchInterventions({
       query,
       hierarchy: hierarchyValue,
+      system: systemValue,
     });
     if (!error) {
       setResults(data);
@@ -22,7 +25,7 @@ export default function InterventionSearch() {
   };
 
   useEffect(() => {
-    fetchResults("", "");
+    fetchResults("", "", "");
   }, []);
 
   return (
@@ -49,7 +52,7 @@ export default function InterventionSearch() {
             onChange={(e) => {
               const value = e.target.value;
               setSearch(value);
-              fetchResults(value, hierarchy);
+              fetchResults(value, hierarchy, searchBySystem);
             }}
           />
         </div>
@@ -74,22 +77,22 @@ export default function InterventionSearch() {
             onChange={(e) => {
               const value = e.target.value;
               setHierarchy(value);
-              fetchResults(search, value);
+              fetchResults(search, value, searchBySystem);
             }}
           >
             <option value=""> -- Seleccione -- </option>
-            <option value="Ciudad">Ciudad</option>
-            <option value="Barrial y Suburbano">Barrial y Suburbano</option>
-            <option value="Metropolitano y Regional">
+            <option value="6894c5d74cad0142c0ca580b">Ciudad</option>
+            <option value="6894c5d74cad0142c0ca580c">Barrial y Suburbano</option>
+            <option value="6894c5d74cad0142c0ca580d">
               Metropolitano y Regional
             </option>
-            <option value="Zonal y Corregimental">Zonal y Corregimental</option>
+            <option value="6894c5d74cad0142c0ca580e">Zonal y Corregimental</option>
           </select>
         </div>
         <div className="flex flex-col justify-between h-full mb-2">
           <div className="space-y-1">
             <label
-              htmlFor="hierarchy"
+              htmlFor="system"
               className="text-xl md:text-2xl font-semibold text-primary"
             >
               Sistema
@@ -103,33 +106,35 @@ export default function InterventionSearch() {
             name="system"
             id="system"
             className="w-full rounded-md border border-gray-200 px-3 py-2 text-md text-font-color focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-secondary"
-            //   onChange={(event) => setSearchBySystem(event.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              setSearchBySystem(value);
+              fetchResults(search, hierarchy, value);
+            }}
           >
             <option value=""> -- Seleccione -- </option>
 
             <option
-              value="Sistema de Espacio Público de esparcimiento y
-encuentro"
+              value="67d9e3749f394f4c2c8bcf6b"
             >
               Sistema de Espacio Público de esparcimiento y encuentro
             </option>
-            <option value="Sistema de Movilidad (vías, caminos, ciclorutas, transporte)">
+            <option value="67d9e3a79f394f4c2c8bcf6e">
               Sistema de Movilidad (vías, caminos, ciclorutas, transporte)
             </option>
-            <option value="Sistema de Equipamientos">
+            <option value="67d9e3b49f394f4c2c8bcf71">
               Sistema de Equipamientos
             </option>
             <option
-              value="Sistema de Servicios Públicos (domiciliarios y no
-domiciliarios)"
+              value="67d9e3cd9f394f4c2c8bcf74"
             >
               Sistema de Servicios Públicos (domiciliarios y no domiciliarios)
             </option>
-            <option value="Sistema Habitacional">Sistema Habitacional</option>
-            <option value="Sistema de Centralidades">
+            <option value="67d9e3da9f394f4c2c8bcf77">Sistema Habitacional</option>
+            <option value="67d9e3e79f394f4c2c8bcf7a">
               Sistema de Centralidades
             </option>
-            <option value="Sistema de Patrimonio Cultural Inmueble">
+            <option value="67d9e3f29f394f4c2c8bcf7d">
               Sistema de Patrimonio Cultural Inmueble
             </option>
           </select>
@@ -145,7 +150,7 @@ domiciliarios)"
             >
               <figure className="w-full bg-white rounded-md aspect-square relative overflow-hidden">
                 <p className="p-2 bg-primary text-white rounded-md absolute top-4 left-4">
-                  {intervention.hierarchy}
+                  {intervention.hierarchy.hierarchyName}
                 </p>
                 <img
                   src={intervention.image || "logo.avif"}
@@ -175,6 +180,10 @@ domiciliarios)"
                 type="button"
                 value="Ir a la ficha tecnica"
                 className="bg-primary text-white rounded-md text-lg font-semibold w-full py-2 cursor-pointer hover:bg-secondary transition-all"
+                onClick={() => {
+                  navigate(`/interventions/${intervention._id}`);
+                }}
+
               />
             </div>
           ))}

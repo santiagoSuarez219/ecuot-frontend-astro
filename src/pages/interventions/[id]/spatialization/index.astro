@@ -1,0 +1,32 @@
+---
+import type { InterventionDataSheet } from "../../../../interfaces/interventions-datasheet-list";
+import InterventionsDatasheetLayout from "../../../../layouts/InterventionsDatasheetLayout.astro";
+
+export const getStaticPaths = async () => {
+    const resp = await fetch(
+        `${import.meta.env.BACKEND_URL}/intervention_datasheet`,
+    );
+    const data: InterventionDataSheet[] = await resp.json();
+
+    return data.map((intervention) => ({
+        params: { id: intervention.intervention._id },
+        props: {
+            name: intervention.intervention.interventionName,
+            spatialization: intervention.spatialization,
+        },
+    }));
+};
+
+const { id } = Astro.params;
+const { name, spatialization } = Astro.props;
+---
+
+<InterventionsDatasheetLayout id={id} name={name}>
+    <div class="w-full">
+        <iframe
+            src={spatialization}
+            width="100%"
+            allow="geolocation"
+            class="w-full h-full"></iframe>
+    </div>
+</InterventionsDatasheetLayout>

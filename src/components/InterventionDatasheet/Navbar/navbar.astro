@@ -1,6 +1,4 @@
 ---
-import { Image } from "astro:assets";
-
 const routes = [
   { name: "Inicio", path: "/" },
   { name: "Actuaciones Urbanísticas", path: "/interventions" },
@@ -12,22 +10,7 @@ const routes = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header
-  class="w-full lg:h-14 my-4 lg:mt-16 lg:mb-10 flex items-center justify-between px-4 lg:px-10"
->
-  <a href="/">
-    <figure
-      class="w-4/5 md:w-[250px] lg:w-[200px] xl:w-[250px] md:mr-16 lg:mr-0 xl:mr-16"
-    >
-      <Image
-        src="/src/assets/Images/logo-navbar.png"
-        alt={"ecuot-logo"}
-        width={250}
-        height={250}
-      />
-    </figure>
-  </a>
-
+<header class="w-full lg:h-14 my-4 lg:my-2 flex items-center px-4 lg:px-10">
   <figure
     class="lg:hidden w-[20%] h-full justify-self-end flex justify-end cursor-pointer"
   >
@@ -44,7 +27,7 @@ const currentPath = Astro.url.pathname;
     </svg>
   </figure>
 
-  <nav class="hidden ml-4 lg:flex items-center justify-between lg:flex-1">
+  <nav class="hidden ml-4 lg:flex items-center justify-center lg:flex-1">
     <ul
       class="flex gap-3 xl:gap-6 [&>li]:cursor-pointer [&>li]:hover:underline text-septenary text-[0.9rem] xl:text-base"
     >
@@ -65,11 +48,6 @@ const currentPath = Astro.url.pathname;
           </li>
         ))
       }
-    </ul>
-    <ul>
-      <li class="primary-button">
-        <p class="font-semibold">Iniciar Sesión</p>
-      </li>
     </ul>
   </nav>
 </header>

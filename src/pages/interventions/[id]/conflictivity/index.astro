@@ -1,0 +1,46 @@
+---
+import { Image } from "astro:assets";
+
+import type { InterventionDataSheet } from "../../../../interfaces/interventions-datasheet-list";
+import InterventionsDatasheetLayout from "../../../../layouts/InterventionsDatasheetLayout.astro";
+
+export const getStaticPaths = async () => {
+    const resp = await fetch(
+        `${import.meta.env.BACKEND_URL}/intervention_datasheet`,
+    );
+    const data: InterventionDataSheet[] = await resp.json();
+
+    return data.map((intervention) => ({
+        params: { id: intervention.intervention._id },
+        props: {
+            name: intervention.intervention.interventionName,
+            conflictivity: intervention.conflictivity,
+            image_conflictivity: intervention.image_conflictivity,
+        },
+    }));
+};
+
+const { id } = Astro.params;
+const { name, conflictivity, image_conflictivity } = Astro.props;
+---
+
+<InterventionsDatasheetLayout id={id} name={name}>
+    <article
+        class="lg:datasheet__content lg:w-[50%] p-4 lg:p-12 lg:overflow-auto bg-white"
+    >
+        <h1 class="text-5xl font-semibold capitalize text-primary mb-6">
+            Conflictividad
+        </h1>
+        <p class="text-lg text-justify text-font-color whitespace-pre-line">
+            {conflictivity}
+        </p>
+    </article>
+    <Image
+        src={image_conflictivity}
+        alt={`Imagen representativa de la intervencion ${name}`}
+        width={800}
+        height={600}
+        class="lg:w-[50%] h-[300px] lg:h-full object-contain pb-[76px] lg:pb-0 bg-white"
+        )
+    />
+</InterventionsDatasheetLayout>

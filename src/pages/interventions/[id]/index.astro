@@ -1,0 +1,40 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+import InterventionDataSheetLayout from "../../../layouts/InterventionsDatasheetLayout.astro";
+import type { InterventionDataSheet } from "../../../interfaces/interventions-datasheet-list";
+
+export const getStaticPaths = async () => {
+  const resp = await fetch(
+    `${import.meta.env.BACKEND_URL}/intervention_datasheet`,
+  );
+  const data: InterventionDataSheet[] = await resp.json();
+
+  return data.map((intervention) => ({
+    params: { id: intervention.intervention._id },
+    props: {
+      name: intervention.intervention.interventionName,
+      image: intervention.intervention.image,
+    },
+  }));
+};
+
+const { id } = Astro.params;
+const { name, image } = Astro.props;
+---
+
+<InterventionDataSheetLayout id={id} name={name} image={image}>
+  <h2
+    class="lg:w-[50%] bg-white p-4 lg:p-12 text-5xl font-semibold capitalize text-primary flex items-center"
+  >
+    {name}
+  </h2>
+  <Image
+    src={image}
+    alt={`Imagen representativa de la intervencion ${name}`}
+    width={800}
+    height={600}
+    class="lg:w-[50%] h-[300px] lg:h-full object-cover pb-[76px] lg:pb-0"
+  />
+</InterventionDataSheetLayout>

@@ -1,0 +1,120 @@
+---
+import { ClientRouter } from "astro:transitions";
+import "@fontsource-variable/cabin";
+import "../styles/global.css";
+import { Icon } from "astro-icon/components";
+
+import Navbar from "@components/InterventionDatasheet/Navbar/navbar.astro";
+
+type IconItem = { name: string; urlIcon: string; url: string };
+
+const icons: IconItem[] = [
+    { name: "Descripcion", urlIcon: "description-icon", url: "/description" },
+    { name: "Caracteristicas", urlIcon: "features-icon", url: "/features" },
+    {
+        name: "Conflictividad",
+        urlIcon: "conflictivity-icon",
+        url: "/conflictivity",
+    },
+    {
+        name: "Espacializacion",
+        urlIcon: "spatialization-icon",
+        url: "/spatialization",
+    },
+];
+
+const { id, name } = Astro.props as { id: string; name: string };
+
+const currentPath = Astro.url.pathname;
+const lastPathSegment = currentPath.split("/").filter(Boolean).pop() ?? "";
+---
+
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{name}</title>
+        <ClientRouter />
+    </head>
+    <body class="w-full h-[calc(100vh-72px)]">
+        <Navbar />
+        <div
+            class="w-full lg:h-full xl:px-20 xl:py-12 py-4 flex gap-6 lg:justify-center lg:bg-gradient-to-r from-septenary to-senary relative"
+        >
+            <div
+                class="w-full lg:w-[85%] h-[100%] rounded-2xl flex flex-col lg:flex-row lg:overflow-hidden relative"
+            >
+                <slot />
+            </div>
+
+            <nav
+                class="hidden lg:block w-[10%] h-full shadow-xl rounded-2xl bg-white"
+            >
+                <ul
+                    class="w-full h-full text-center flex flex-col justify-around"
+                >
+                    {
+                        icons.map((icon) => (
+                            <li>
+                                <a
+                                    href={`/interventions/${id}${icon.url}`}
+                                    class="flex flex-col items-center relative cursor-pointer"
+                                >
+                                    <Icon
+                                        name={icon.urlIcon}
+                                        size={50}
+                                        class:list={[
+                                            "w-12 p-2 rounded-full mb-2 text-white hover:scale-110 transition-transform",
+                                            {
+                                                "bg-secondary":
+                                                    `/${lastPathSegment}` ===
+                                                    icon.url,
+                                                "bg-primary":
+                                                    `/${lastPathSegment}` !==
+                                                    icon.url,
+                                            },
+                                        ]}
+                                    />
+                                    <h3 class="font-medium">{icon.name}</h3>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav>
+
+            <!-- Bottom nav (mobile) -->
+            <!-- <nav
+                class="lg:hidden w-full fixed bottom-0 bg-primary text-white font-semibold py-2 px-4"
+            >
+                <ul
+                    class="w-full flex justify-between text-sm md:text-base [&>li]:flex [&>li]:flex-col [&>li]:gap-1 [&>li]:items-center"
+                >
+                    {
+                        icons.map((icon) => (
+                            <li class="cursor-pointer">
+                                <a
+                                    href={`/interventions/${id}${icon.url}`}
+                                    class="flex flex-col items-center"
+                                >
+                                    <Icon name={icon.urlIcon} size={18} />
+                                    <p>{icon.name}</p>
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </nav> -->
+        </div>
+    </body>
+</html>
+
+<style>
+    html {
+        margin: 0;
+        width: 100%;
+    }
+</style>
